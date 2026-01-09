@@ -601,17 +601,17 @@
             object-fit: cover;
         }
 
-        .edit-books-grid {
+        .edit-albums-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
         }
 
-        .edit-book-item {
-            aspect-ratio: 3/4;
+        .edit-album-item {
+            aspect-ratio: 1;
             background-color: #cccccc;
             opacity: 0.2;
-            border-radius: 12px;
+            border-radius: 50%;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -620,7 +620,7 @@
             padding-bottom: 10px;
         }
 
-        .edit-book-item img {
+        .edit-album-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -815,7 +815,7 @@
                     </div>
                     </div>
 
-                    <div class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
+                    <div id="books-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
                         <div class="gallery-title">Favorite Books</div>
                         <div class="gallery-books">
                             <div>
@@ -836,7 +836,32 @@
                             </div>
                         </div>
                         <div class="next-btn">
-                            <button class="btn btn-white">Next</button>
+                            <button class="btn btn-white" onclick="nextPage()">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="albums-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8; display: none;">
+                        <div class="gallery-title">Favorite Album</div>
+                        <div class="gallery-albums">
+                            <div>
+                                <div class="album-item"><img src="https://i.pinimg.com/736x/97/eb/b0/97ebb0d418ecaad75c831c66e26bebb0.jpg" alt="Wipe Out"></div>
+                                <div class="album-label">Wipe Out</div>
+                            </div>
+                            <div>
+                                <div class="album-item"><img src="https://i.pinimg.com/736x/e2/2f/1e/e22f1e4a867607f070561f2a198ffbe7.jpg" alt="Paradise"></div>
+                                <div class="album-label">Paradise</div>
+                            </div>
+                            <div>
+                                <div class="album-item"><img src="https://i.pinimg.com/1200x/fc/2e/22/fc2e22b867d7ccf7158aeb7b56ec9a40.jpg" alt="Chase Atlantic"></div>
+                                <div class="album-label">Chase Atlantic</div>
+                            </div>
+                            <div>
+                                <div class="album-item"><img src="https://i.pinimg.com/1200x/d9/f2/e9/d9f2e9d0bc11a75b6448ac8dd833568c.jpg" alt="AM"></div>
+                                <div class="album-label">AM</div>
+                            </div>
+                        </div>
+                        <div class="next-btn">
+                            <button class="btn btn-white" onclick="prevPage()">Back</button>
                         </div>
                     </div>
                 </div>
@@ -893,23 +918,23 @@
                     </div>
 
                     <div class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
-                        <div class="gallery-title">Favorite Books</div>
-                        <div class="edit-books-grid">
-                            <div class="edit-book-item">
+                        <div class="gallery-title">Favorite Album</div>
+                        <div class="edit-albums-grid">
+                            <div class="edit-album-item">
                                 <span class="edit-item-add">+</span>
                             </div>
-                            <div class="edit-book-item">
+                            <div class="edit-album-item">
                                 <span class="edit-item-add">+</span>
                             </div>
-                            <div class="edit-book-item">
+                            <div class="edit-album-item">
                                 <span class="edit-item-add">+</span>
                             </div>
-                            <div class="edit-book-item">
+                            <div class="edit-album-item">
                                 <span class="edit-item-add">+</span>
                             </div>
                         </div>
                         <div class="next-btn">
-                            <button class="btn btn-white">Next</button>
+                            <button class="btn btn-white" onclick="nextPage()">Next</button>
                         </div>
                     </div>
                 </div>
@@ -953,4 +978,22 @@
                 btn.textContent = 'Follow';
             }
         }
+
+        function nextPage() {
+            const booksSection = document.getElementById('books-section');
+            const albumsSection = document.getElementById('albums-section');
+            
+            booksSection.style.display = 'none';
+            albumsSection.style.display = 'block';
+        }
+
+        function prevPage() {
+            const booksSection = document.getElementById('books-section');
+            const albumsSection = document.getElementById('albums-section');
+            
+            booksSection.style.display = 'block';
+            albumsSection.style.display = 'none';
+        }
     </script>
+</body>
+</html>
