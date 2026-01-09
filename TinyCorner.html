@@ -368,6 +368,26 @@
             color: #333;
         }
 
+        .edit-title-input {
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 600;
+            text-align: center;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            font-family: inherit;
+        }
+
+        .edit-title-input:focus {
+            outline: none;
+            border-color: #8D50DD;
+            background-color: white;
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -588,17 +608,33 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .edit-item:hover {
+            opacity: 0.4;
+            background-color: #999999;
         }
 
         .edit-item-add {
             color: #333;
             font-size: 28px;
+            pointer-events: none;
         }
 
         .edit-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 1;
+        }
+
+        .edit-item.has-image {
+            opacity: 1;
+        }
+
+        .hidden-file-input {
+            display: none;
         }
 
         .edit-albums-grid {
@@ -874,9 +910,10 @@
                 <div style="display: flex; gap: 20px; align-items: flex-start;">
                     <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
                         <div class="profile-header">
-                            <div class="edit-avatar">
-                                <img class="profile-avatar-edit">
+                            <div class="edit-avatar" onclick="triggerFileInput('avatar-input')">
+                                <img class="profile-avatar-edit" id="avatar-preview">
                                 <div class="edit-add-icon">+</div>
+                                <input type="file" id="avatar-input" class="hidden-file-input" accept="image/*" onchange="addImage(document.getElementById('avatar-input'), 'avatar-input')">
                             </div>
                             <div class="profile-info">
                                 <div class="profile-name">Chheng Kimter</div>
@@ -890,14 +927,17 @@
 
                         <div class="gallery-left" style="flex: 1; background-color: #ffc9d4;">
                             <div class="edit-gallery">
-                                <div class="edit-item">
+                                <div class="edit-item" onclick="triggerFileInput('gallery-item-0')">
                                     <span class="edit-item-add">+</span>
+                                    <input type="file" id="gallery-item-0" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-0')">
                                 </div>
-                                <div class="edit-item">
+                                <div class="edit-item" onclick="triggerFileInput('gallery-item-1')">
                                     <span class="edit-item-add">+</span>
+                                    <input type="file" id="gallery-item-1" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-1')">
                                 </div>
-                                <div class="edit-item">
+                                <div class="edit-item" onclick="triggerFileInput('gallery-item-2')">
                                     <span class="edit-item-add">+</span>
+                                    <input type="file" id="gallery-item-2" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-2')">
                                 </div>
                             </div>
                             <div class="color-selector">
@@ -918,19 +958,23 @@
                     </div>
 
                     <div class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
-                        <div class="gallery-title">Favorite Album</div>
+                        <input type="text" class="edit-title-input" id="album-title-input" value="Favorite Album" maxlength="30">
                         <div class="edit-albums-grid">
-                            <div class="edit-album-item">
+                            <div class="edit-album-item" onclick="triggerFileInput('album-item-0')">
                                 <span class="edit-item-add">+</span>
+                                <input type="file" id="album-item-0" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-0')">
                             </div>
-                            <div class="edit-album-item">
+                            <div class="edit-album-item" onclick="triggerFileInput('album-item-1')">
                                 <span class="edit-item-add">+</span>
+                                <input type="file" id="album-item-1" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-1')">
                             </div>
-                            <div class="edit-album-item">
+                            <div class="edit-album-item" onclick="triggerFileInput('album-item-2')">
                                 <span class="edit-item-add">+</span>
+                                <input type="file" id="album-item-2" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-2')">
                             </div>
-                            <div class="edit-album-item">
+                            <div class="edit-album-item" onclick="triggerFileInput('album-item-3')">
                                 <span class="edit-item-add">+</span>
+                                <input type="file" id="album-item-3" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-3')">
                             </div>
                         </div>
                         <div class="next-btn">
@@ -993,6 +1037,36 @@
             
             booksSection.style.display = 'block';
             albumsSection.style.display = 'none';
+        }
+
+        function triggerFileInput(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function addImage(input, itemId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    const itemElement = input.parentElement;
+                    const addIcon = itemElement.querySelector('.edit-item-add');
+                    
+                    // Remove existing image if any
+                    const existingImg = itemElement.querySelector('img');
+                    if (existingImg) {
+                        existingImg.remove();
+                    }
+                    
+                    // Create and add new image
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.opacity = '1';
+                    itemElement.insertBefore(img, addIcon);
+                    itemElement.classList.add('has-image');
+                };
+                
+                reader.readAsDataURL(input.files[0]);
+            }
         }
     </script>
 </body>
