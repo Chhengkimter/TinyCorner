@@ -673,14 +673,20 @@
                 <button id="editBtn" class="btn btn-yellow" onclick="handleEditClick()">Edit</button>
             </div>
             <div class="header-left">
-                <button class="btn btn-yellow" onclick="navigateTo('profile')">Home</button>
+                <button class="btn btn-yellow" onclick="navigateTo('landing')">Home</button>
                 <button class="btn btn-yellow" onclick="navigateTo('home')">Search</button>
+                <button class="btn btn-yellow" onclick="navigateTo('profile')">Profile</button>
             </div>
             <div class="header-right">
                 <button class="btn btn-white" onclick="navigateTo('login')">Log In</button>
                 <button class="btn btn-white" onclick="navigateTo('signup')">Sign Up</button>
             </div>
         </header>
+
+        <!-- Landing Page -->
+        <div id="landing" class="page active">
+            <!-- Empty landing page -->
+        </div>
 
         <!-- User List Page (Search) -->
         <div id="home" class="page">
@@ -762,7 +768,7 @@
         </div>
 
         <!-- Profile Page -->
-        <div id="profile" class="page active">
+        <div id="profile" class="page">
             <div class="profile-container">
                 <div style="display: flex; gap: 20px; align-items: flex-start;">
                     <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
@@ -775,6 +781,7 @@
                             </div>
                             <div class="profile-action">
                                 <button id="followBtn" class="btn btn-light-pink" onclick="toggleFollow()">Follow</button>
+                                <button class="btn btn-light-pink" onclick="copyProfileLink(this)" style="margin-top: 10px;">Copy Link</button>
                             </div>
                         </div>
 
@@ -959,7 +966,12 @@
             document.getElementById(pageId).classList.add('active');
             
             const editBtn = document.getElementById('editBtn');
-            editBtn.textContent = pageId === 'edit' ? 'Save' : 'Edit';
+            if (pageId === 'profile' || pageId === 'edit') {
+                editBtn.style.display = 'block';
+                editBtn.textContent = pageId === 'edit' ? 'Save' : 'Edit';
+            } else {
+                editBtn.style.display = 'none';
+            }
         }
 
         function handleEditClick() {
@@ -1008,6 +1020,19 @@
         function toggleFollow() {
             const btn = document.getElementById('followBtn');
             btn.textContent = btn.textContent === 'Follow' ? 'Unfollow' : 'Follow';
+        }
+
+        function copyProfileLink(btn) {
+            const profileLink = window.location.origin + window.location.pathname + '?profile=chhengkimter';
+            navigator.clipboard.writeText(profileLink).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = 'Profile link copy!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy profile link');
+            });
         }
 
         function nextPage() {
