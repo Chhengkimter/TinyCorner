@@ -79,7 +79,6 @@
 
         .btn-pink:hover {
             background-color: #F86573;
-            color: #8D50DD;
         }
 
         .btn-light-pink {
@@ -91,16 +90,6 @@
 
         .btn-light-pink:hover {
             background-color: #FFD0D0;
-            color: #8D50DD;
-        }
-
-        .btn-green {
-            background-color: #c4d98e;
-            color: #333;
-        }
-
-        .btn-green:hover {
-            background-color: #b8cc7a;
             color: #8D50DD;
         }
 
@@ -116,7 +105,6 @@
             flex-direction: column;
         }
 
-        /* search list */
         .search-bar {
             background-color: #b8d97a;
             border: none;
@@ -165,7 +153,7 @@
             color: #333;
         }
 
-        /* Login/Signup Pages */
+        /* Auth Pages */
         .auth-container {
             display: flex;
             justify-content: center;
@@ -233,22 +221,11 @@
             background-color: #ff88a0;
         }
 
-        .forgot-password {
-            font-size: 13px;
-            color: #333;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-
         .auth-footer {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
             color: #333;
-        }
-
-        .auth-footer-btn {
-            margin-left: 10px;
         }
 
         /* Profile Page */
@@ -276,7 +253,6 @@
             flex-shrink: 0;
             position: relative;
             object-fit: cover;
-            cursor: pointer;
         }
 
         .profile-avatar-edit {
@@ -291,19 +267,19 @@
             cursor: pointer;
         }
 
-        .profile-edit-icon {
+        .edit-add-icon {
             position: absolute;
-            bottom: 5px;
-            right: 5px;
-            width: 30px;
-            height: 30px;
-            background-color: #333;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 20px;
+            color: #a5a5a5;
+            font-size: 28px;
             cursor: pointer;
         }
 
@@ -349,7 +325,6 @@
             background-color: #F9D0CE;
             border-radius: 20px;
             padding: 20px;
-            margin-top: -15px;
         }
 
         .gallery-right {
@@ -368,26 +343,6 @@
             color: #333;
         }
 
-        .edit-title-input {
-            font-size: 20px;
-            font-style: italic;
-            font-weight: 600;
-            text-align: center;
-            border: 2px solid #333;
-            border-radius: 10px;
-            padding: 8px 12px;
-            margin-bottom: 20px;
-            color: #333;
-            background-color: rgba(255, 255, 255, 0.7);
-            font-family: inherit;
-        }
-
-        .edit-title-input:focus {
-            outline: none;
-            border-color: #8D50DD;
-            background-color: white;
-        }
-
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -400,8 +355,6 @@
             background-color: #ddd;
             border-radius: 12px;
             overflow: hidden;
-            cursor: pointer;
-            position: relative;
         }
 
         .gallery-item img {
@@ -437,6 +390,13 @@
             height: 25px;
             border-radius: 50%;
             cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .color-item input[type="radio"] {
+            cursor: pointer;
+            accent-color: #8D50DD;
         }
 
         .color-black { background-color: #000; }
@@ -514,12 +474,6 @@
         }
 
         /* Edit Page */
-        .edit-container {
-            max-width: 800px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
         .edit-header {
             background-color: #ffc9d4;
             border-radius: 20px;
@@ -537,29 +491,37 @@
             flex-shrink: 0;
         }
 
-        .edit-avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: #ddd;
-            opacity: 0.6;
-            object-fit: cover;
+        .edit-info {
+            flex: 1;
         }
 
-        .edit-add-icon {
-            position: absolute;
-            top: 48%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #a5a5a5;
-            font-size: 28px;
-            cursor: pointer;
+        .edit-form-group {
+            margin-bottom: 15px;
+        }
+
+        .edit-form-label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .edit-form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            font-family: inherit;
+        }
+
+        .edit-form-input:focus {
+            outline: none;
+            border-color: #8D50DD;
+            background-color: white;
         }
 
         .edit-sections {
@@ -581,13 +543,24 @@
             padding: 20px;
         }
 
-        .edit-title {
+        .edit-title-input {
             font-size: 20px;
             font-style: italic;
             font-weight: 600;
             text-align: center;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 8px 12px;
             margin-bottom: 20px;
             color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            font-family: inherit;
+        }
+
+        .edit-title-input:focus {
+            outline: none;
+            border-color: #8D50DD;
+            background-color: white;
         }
 
         .edit-gallery {
@@ -653,25 +626,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-bottom: 10px;
         }
 
         .edit-album-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .edit-item-label {
-            font-size: 11px;
-            color: #666;
-            margin-top: 6px;
-            text-align: center;
-        }
-
-        .add-page-btn {
-            text-align: center;
-            margin-top: 15px;
         }
 
         @media (max-width: 768px) {
@@ -693,7 +653,7 @@
                 flex-direction: column;
             }
 
-            .profile-header {
+            .profile-header, .edit-header {
                 flex-direction: column;
                 text-align: center;
             }
@@ -726,7 +686,7 @@
         <div id="home" class="page">
             <input type="text" class="search-bar" placeholder="🔍 Search">
             <div class="user-list">
-                <div class="user-item" onclick="showPage('profile')">
+                <div class="user-item" onclick="navigateTo('profile')">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/6a/68/5a/6a685a9ac477debba2d64fae509864f6.jpg" alt="Hawkeye">
                     <div class="user-name">Hawkeye</div>
                 </div>
@@ -771,7 +731,6 @@
                         <input type="password" class="form-input" placeholder="">
                     </div>
                     <button class="auth-btn" onclick="navigateTo('profile')">Log In</button>
-                    <div class="forgot-password">Forgot Password</div>
                 </div>
                 <div class="auth-footer" style="margin-top: 30px;">
                     Do not have an account yet? 
@@ -810,9 +769,9 @@
                         <div class="profile-header">
                             <img class="profile-avatar" src="https://i.pinimg.com/736x/b2/08/47/b208479ed9462d6c97b79ea976d4f857.jpg" alt="Chheng Kimter">
                             <div class="profile-info">
-                                <div class="profile-name">Chheng Kimter</div>
-                                <div class="profile-phone">+855 12 345 678</div>
-                                <div class="profile-date">04/24/2000</div>
+                                <div class="profile-name" id="display-name">Chheng Kimter</div>
+                                <div class="profile-phone" id="display-phone">+855 12 345 678</div>
+                                <div class="profile-date" id="display-date">04/24/2000</div>
                             </div>
                             <div class="profile-action">
                                 <button id="followBtn" class="btn btn-light-pink" onclick="toggleFollow()">Follow</button>
@@ -820,35 +779,35 @@
                         </div>
 
                         <div class="gallery-left" style="flex: 1; background-color: #ffc9d4;">
-                        <div class="gallery-grid">
-                            <div>
-                                <div class="gallery-item"><img src="https://i.pinimg.com/474x/cf/d6/ab/cfd6abaa56482e74bcd6b9e56ad1d379.jpg" alt="Dream"></div>
-                                <div class="gallery-item-label">Dream</div>
+                            <div class="gallery-grid">
+                                <div>
+                                    <div class="gallery-item"><img src="https://i.pinimg.com/474x/cf/d6/ab/cfd6abaa56482e74bcd6b9e56ad1d379.jpg" alt="Dream"></div>
+                                    <div class="gallery-item-label">Dream</div>
+                                </div>
+                                <div>
+                                    <div class="gallery-item"><img src="https://i.pinimg.com/474x/03/1e/1f/031e1f44db744949f295511c81e42c02.jpg" alt="Matcha"></div>
+                                    <div class="gallery-item-label">Matcha</div>
+                                </div>
+                                <div>
+                                    <div class="gallery-item"><img src="https://i.pinimg.com/736x/30/8f/a4/308fa4e9f83e66ca1a6994dea6d04825.jpg" alt="Cat"></div>
+                                    <div class="gallery-item-label">Cat</div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="gallery-item"><img src="https://i.pinimg.com/474x/03/1e/1f/031e1f44db744949f295511c81e42c02.jpg" alt="Matcha"></div>
-                                <div class="gallery-item-label">Matcha</div>
-                            </div>
-                            <div>
-                                <div class="gallery-item"><img src="https://i.pinimg.com/736x/30/8f/a4/308fa4e9f83e66ca1a6994dea6d04825.jpg" alt="Cat"></div>
-                                <div class="gallery-item-label">Cat</div>
+                            <div class="color-selector">
+                                <div class="color-item">
+                                    <div class="color-circle color-black"></div>
+                                    <span class="color-label">Black</span>
+                                </div>
+                                <div class="color-item">
+                                    <div class="color-circle color-pink"></div>
+                                    <span class="color-label">Pink</span>
+                                </div>
+                                <div class="color-item">
+                                    <div class="color-circle color-sky"></div>
+                                    <span class="color-label">Sky Blue</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="color-selector">
-                            <div class="color-item">
-                                <div class="color-circle color-black"></div>
-                                <span class="color-label">Black</span>
-                            </div>
-                            <div class="color-item">
-                                <div class="color-circle color-pink"></div>
-                                <span class="color-label">Pink</span>
-                            </div>
-                            <div class="color-item">
-                                <div class="color-circle color-sky"></div>
-                                <span class="color-label">Sky Blue</span>
-                            </div>
-                        </div>
-                    </div>
                     </div>
 
                     <div id="books-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
@@ -909,23 +868,30 @@
             <div class="profile-container">
                 <div style="display: flex; gap: 20px; align-items: flex-start;">
                     <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                        <div class="profile-header">
+                        <div class="edit-header">
                             <div class="edit-avatar" onclick="triggerFileInput('avatar-input')">
                                 <img class="profile-avatar-edit" id="avatar-preview">
                                 <div class="edit-add-icon">+</div>
                                 <input type="file" id="avatar-input" class="hidden-file-input" accept="image/*" onchange="addImage(document.getElementById('avatar-input'), 'avatar-input')">
                             </div>
-                            <div class="profile-info">
-                                <div class="profile-name">Chheng Kimter</div>
-                                <div class="profile-phone">+855 12 345 678</div>
-                                <div class="profile-date">04/24/2000</div>
-                            </div>
-                            <div class="profile-action">
-                                <button id="followBtn" class="btn btn-light-pink" onclick="toggleFollow()">Follow</button>
+                            <div class="edit-info">
+                                <div class="edit-form-group">
+                                    <label class="edit-form-label">Display Name</label>
+                                    <input type="text" class="edit-form-input" id="edit-name" value="Chheng Kimter">
+                                </div>
+                                <div class="edit-form-group">
+                                    <label class="edit-form-label">Phone Number</label>
+                                    <input type="text" class="edit-form-input" id="edit-phone" value="+855 12 345 678">
+                                </div>
+                                <div class="edit-form-group">
+                                    <label class="edit-form-label">Birthday</label>
+                                    <input type="text" class="edit-form-input" id="edit-date" value="04/24/2000">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="gallery-left" style="flex: 1; background-color: #ffc9d4;">
+                        <div class="edit-left" style="flex: 1; background-color: #ffc9d4;">
+                            <div class="gallery-title">Gallery</div>
                             <div class="edit-gallery">
                                 <div class="edit-item" onclick="triggerFileInput('gallery-item-0')">
                                     <span class="edit-item-add">+</span>
@@ -940,24 +906,27 @@
                                     <input type="file" id="gallery-item-2" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-2')">
                                 </div>
                             </div>
-                            <div class="color-selector">
-                                <div class="color-item">
-                                    <div class="color-circle color-black"></div>
-                                    <span class="color-label">Black</span>
+                            <div class="color-selector" style="flex-direction: column; gap: 15px;">
+                                <div class="color-item" style="gap: 15px;">
+                                    <input type="text" class="edit-form-input color-name-input" id="color-name-0" value="Black" style="flex: 1; padding: 8px;">
+                                    <div class="color-circle" id="color-circle-0" style="width: 35px; height: 35px; background-color: #000000; border-radius: 50%;"></div>
+                                    <input type="color" id="color-value-0" value="#000000" onchange="updateColorCircle(0)" oninput="updateColorCircle(0)" style="width: 50px; height: 35px; border: none; border-radius: 8px; cursor: pointer;">
                                 </div>
-                                <div class="color-item">
-                                    <div class="color-circle color-pink"></div>
-                                    <span class="color-label">Pink</span>
+                                <div class="color-item" style="gap: 15px;">
+                                    <input type="text" class="edit-form-input color-name-input" id="color-name-1" value="Pink" style="flex: 1; padding: 8px;">
+                                    <div class="color-circle" id="color-circle-1" style="width: 35px; height: 35px; background-color: #FFB2BA; border-radius: 50%;"></div>
+                                    <input type="color" id="color-value-1" value="#FFB2BA" onchange="updateColorCircle(1)" oninput="updateColorCircle(1)" style="width: 50px; height: 35px; border: none; border-radius: 8px; cursor: pointer;">
                                 </div>
-                                <div class="color-item">
-                                    <div class="color-circle color-sky"></div>
-                                    <span class="color-label">Sky Blue</span>
+                                <div class="color-item" style="gap: 15px;">
+                                    <input type="text" class="edit-form-input color-name-input" id="color-name-2" value="Sky Blue" style="flex: 1; padding: 8px;">
+                                    <div class="color-circle" id="color-circle-2" style="width: 35px; height: 35px; background-color: #87ceeb; border-radius: 50%;"></div>
+                                    <input type="color" id="color-value-2" value="#87ceeb" onchange="updateColorCircle(2)" oninput="updateColorCircle(2)" style="width: 50px; height: 35px; border: none; border-radius: 8px; cursor: pointer;">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
+                    <div class="edit-right" style="flex: 1; background-color: #d4e8a8;">
                         <input type="text" class="edit-title-input" id="album-title-input" value="Favorite Album" maxlength="30">
                         <div class="edit-albums-grid">
                             <div class="edit-album-item" onclick="triggerFileInput('album-item-0')">
@@ -977,9 +946,6 @@
                                 <input type="file" id="album-item-3" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-3')">
                             </div>
                         </div>
-                        <div class="next-btn">
-                            <button class="btn btn-white" onclick="nextPage()">Next</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -988,55 +954,70 @@
 
     <script>
         function navigateTo(pageId) {
-            // Hide all pages
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
-            
-            // Show selected page
             document.getElementById(pageId).classList.add('active');
             
-            // Update edit button text
             const editBtn = document.getElementById('editBtn');
-            if (pageId === 'edit') {
-                editBtn.textContent = 'Save';
-            } else {
-                editBtn.textContent = 'Edit';
-            }
+            editBtn.textContent = pageId === 'edit' ? 'Save' : 'Edit';
         }
 
         function handleEditClick() {
             const currentPage = document.querySelector('.page.active').id;
-            
             if (currentPage === 'profile') {
                 navigateTo('edit');
             } else if (currentPage === 'edit') {
+                saveProfile();
                 navigateTo('profile');
             }
         }
 
-        function toggleFollow() {
-            const btn = document.getElementById('followBtn');
-            if (btn.textContent === 'Follow') {
-                btn.textContent = 'Unfollow';
-            } else {
-                btn.textContent = 'Follow';
+        function saveProfile() {
+            const name = document.getElementById('edit-name').value;
+            const phone = document.getElementById('edit-phone').value;
+            const date = document.getElementById('edit-date').value;
+
+            document.getElementById('display-name').textContent = name;
+            document.getElementById('display-phone').textContent = phone;
+            document.getElementById('display-date').textContent = date;
+
+            // Save color information
+            const profileColorSelector = document.querySelector('#profile .color-selector');
+            profileColorSelector.innerHTML = '';
+            
+            for (let i = 0; i < 3; i++) {
+                const colorName = document.getElementById('color-name-' + i).value;
+                const colorValue = document.getElementById('color-value-' + i).value;
+                
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.innerHTML = `
+                    <div class="color-circle" style="background-color: ${colorValue};"></div>
+                    <span class="color-label">${colorName}</span>
+                `;
+                profileColorSelector.appendChild(colorItem);
             }
         }
 
+        function updateColorCircle(index) {
+            const colorValue = document.getElementById('color-value-' + index).value;
+            const colorCircle = document.getElementById('color-circle-' + index);
+            colorCircle.style.backgroundColor = colorValue;
+        }
+
+        function toggleFollow() {
+            const btn = document.getElementById('followBtn');
+            btn.textContent = btn.textContent === 'Follow' ? 'Unfollow' : 'Follow';
+        }
+
         function nextPage() {
-            const booksSection = document.getElementById('books-section');
-            const albumsSection = document.getElementById('albums-section');
-            
-            booksSection.style.display = 'none';
-            albumsSection.style.display = 'block';
+            document.getElementById('books-section').style.display = 'none';
+            document.getElementById('albums-section').style.display = 'block';
         }
 
         function prevPage() {
-            const booksSection = document.getElementById('books-section');
-            const albumsSection = document.getElementById('albums-section');
-            
-            booksSection.style.display = 'block';
-            albumsSection.style.display = 'none';
+            document.getElementById('books-section').style.display = 'block';
+            document.getElementById('albums-section').style.display = 'none';
         }
 
         function triggerFileInput(inputId) {
@@ -1046,25 +1027,21 @@
         function addImage(input, itemId) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                
                 reader.onload = function(e) {
                     const itemElement = input.parentElement;
                     const addIcon = itemElement.querySelector('.edit-item-add');
                     
-                    // Remove existing image if any
                     const existingImg = itemElement.querySelector('img');
                     if (existingImg) {
                         existingImg.remove();
                     }
                     
-                    // Create and add new image
                     const img = document.createElement('img');
                     img.src = e.target.result;
                     img.style.opacity = '1';
                     itemElement.insertBefore(img, addIcon);
                     itemElement.classList.add('has-image');
                 };
-                
                 reader.readAsDataURL(input.files[0]);
             }
         }
