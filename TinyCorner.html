@@ -24,6 +24,12 @@
             flex-direction: column;
         }
 
+        .container.home-bg {
+            background: linear-gradient(135deg, #f5ede0 0%, #ffd4e5 50%, #e8f4d4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
         /* Header/Navbar */
         header {
             background-color: #EA717D;
@@ -32,6 +38,8 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
         }
 
         .header-left, .header-right {
@@ -93,11 +101,40 @@
             color: #8D50DD;
         }
 
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .float-element {
+            position: absolute;
+            opacity: 0.05;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .float-element:nth-child(1) { top: 10%; left: 5%; font-size: 80px; animation-delay: 0s; }
+        .float-element:nth-child(2) { top: 20%; right: 10%; font-size: 60px; animation-delay: 1s; }
+        .float-element:nth-child(3) { bottom: 20%; left: 15%; font-size: 70px; animation-delay: 2s; }
+        .float-element:nth-child(4) { bottom: 10%; right: 5%; font-size: 75px; animation-delay: 3s; }
+
         .page {
             display: none;
             flex: 1;
             padding: 30px;
             overflow-y: auto;
+            position: relative;
+            z-index: 5;
         }
 
         .page.active {
@@ -106,50 +143,64 @@
         }
 
         .search-bar {
-            background-color: #b8d97a;
+            background: linear-gradient(135deg, #b8d97a, #d4e8a8);
             border: none;
             border-radius: 25px;
-            padding: 12px 20px;
+            padding: 15px 25px;
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto 30px;
+            max-width: 600px;
+            margin: 0 auto 40px;
             display: block;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 8px 25px rgba(184, 217, 122, 0.4);
+            transform: translateY(-2px);
         }
 
         .user-list {
-            max-width: 500px;
+            max-width: 700px;
             margin: 0 auto;
             width: 100%;
         }
 
         .user-item {
-            background-color: #ffc9d4;
-            padding: 20px;
-            margin-bottom: 2px;
+            background: linear-gradient(135deg, #ffc9d4, #ffb5c5);
+            padding: 20px 25px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(255, 197, 212, 0.2);
         }
 
         .user-item:hover {
-            background-color: #ffb5c5;
+            background: linear-gradient(135deg, #ffb5c5, #ffa3b8);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(255, 197, 212, 0.4);
         }
 
         .user-avatar {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background-color: #ddd;
             flex-shrink: 0;
             object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.6);
         }
 
         .user-name {
-            font-size: 16px;
-            font-weight: 500;
+            font-size: 18px;
+            font-weight: 600;
             color: #333;
         }
 
@@ -230,7 +281,7 @@
 
         /* Profile Page */
         .profile-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             width: 100%;
         }
@@ -663,10 +714,29 @@
                 align-self: center;
             }
         }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="container">
+        <!-- Floating Elements (Only on Home) -->
+        <div class="floating-elements" id="floatingElements">
+            <div class="float-element">📚</div>
+            <div class="float-element">🎨</div>
+            <div class="float-element">🎵</div>
+            <div class="float-element">✨</div>
+        </div>
+
         <!-- Header -->
         <header>
             <div class="header-left">
@@ -745,54 +815,93 @@
                     </p>
                 </div>
             </div>
-
-            <style>
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-            </style>
         </div>
 
         <!-- User List Page (Search) -->
         <div id="home" class="page">
-            <input type="text" class="search-bar" placeholder="🔍 Search">
+            <div style="text-align: center; margin-bottom: 50px;">
+                <h2 style="font-size: 42px; font-weight: 800; background: linear-gradient(135deg, #EA717D, #8D50DD); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px;">Discover Corners</h2>
+                <p style="font-size: 16px; color: #666; font-weight: 500;">Explore amazing people and their unique stories</p>
+            </div>
+            <input type="text" class="search-bar" placeholder="🔍 Search by name or interest...">
             <div class="user-list">
-                <div class="user-item" onclick="navigateTo('profile')">
+                <div class="user-item" onclick="navigateTo('profile')" style="animation: slideIn 0.5s ease 0.1s both; background: linear-gradient(135deg, #FFD4E5, #FFB5C5); border: 2px solid #EA717D;">
+                    <img class="user-avatar" src="https://i.pinimg.com/736x/b2/08/47/b208479ed9462d6c97b79ea976d4f857.jpg" alt="Chheng Kimter">
+                    <div style="flex: 1;">
+                        <div class="user-name">Chheng Kimter</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">✨ Creator of Tiny Corner</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
+                </div>
+                <div class="user-item" onclick="navigateTo('profile')" style="animation: slideIn 0.5s ease 0.1s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/6a/68/5a/6a685a9ac477debba2d64fae509864f6.jpg" alt="Hawkeye">
-                    <div class="user-name">Hawkeye</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">Hawkeye</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">📚 Books & Photography</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item">
+                <div class="user-item" style="animation: slideIn 0.5s ease 0.2s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/03/16/f0/0316f06a3b9afe6c24f60e5dae13eb4b.jpg" alt="AHHCHOOOO">
-                    <div class="user-name">AHHCHOOOO</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">AHHCHOOOO</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">🎨 Art & Design</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item">
+                <div class="user-item" style="animation: slideIn 0.5s ease 0.3s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/3c/e6/09/3ce6096c4d1ca2a5b2e10a0c6fc8d76f.jpg" alt="Happier">
-                    <div class="user-name">Happier</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">Happier</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">🎵 Music & Vibes</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item">
+                <div class="user-item" style="animation: slideIn 0.5s ease 0.4s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/6b/25/f9/6b25f952eba7090e75663a57065366d3.jpg" alt="Kidnapper">
-                    <div class="user-name">Kidnapper</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">Kidnapper</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">🍰 Food & Baking</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item">
+                <div class="user-item" style="animation: slideIn 0.5s ease 0.5s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/4e/6f/26/4e6f26f23992e1d2674871d1896854cb.jpg" alt="Judgy">
-                    <div class="user-name">Judgy</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">Judgy</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">🌍 Travel & Adventure</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item">
+                <div class="user-item" style="animation: slideIn 0.5s ease 0.6s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/00/45/8b/00458b48714304436ffa8f07988ea2a1.jpg" alt="Aura Farming">
-                    <div class="user-name">Aura Farming</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">Aura Farming</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">🌱 Wellness & Mindfulness</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item">
+                <div class="user-item" style="animation: slideIn 0.5s ease 0.7s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/92/b3/21/92b3213e4c64445b9cf493e3bb3b907b.jpg" alt="Chimonk">
-                    <div class="user-name">Chimonk</div>
+                    <div style="flex: 1;">
+                        <div class="user-name">Chimonk</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 4px;">🎮 Gaming & Tech</div>
+                    </div>
+                    <div style="font-size: 24px;">→</div>
                 </div>
             </div>
+            <style>
+                @keyframes slideIn {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-30px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+            </style>
         </div>
 
         <!-- Login Page -->
@@ -889,7 +998,7 @@
                         </div>
                     </div>
 
-                    <div id="books-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8;">
+                    <div id="books-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8; max-height: 650px; overflow-y: auto;">
                         <div class="gallery-title">Favorite Books</div>
                         <div class="gallery-books">
                             <div>
@@ -910,11 +1019,11 @@
                             </div>
                         </div>
                         <div class="next-btn">
-                            <button class="btn btn-white" onclick="nextPage()">Next</button>
+                            <button class="btn btn-white" onclick="nextGalleryPage()">Next</button>
                         </div>
                     </div>
 
-                    <div id="albums-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8; display: none;">
+                    <div id="albums-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8; display: none; max-height: 650px; overflow-y: auto;">
                         <div class="gallery-title">Favorite Album</div>
                         <div class="gallery-albums">
                             <div>
@@ -935,7 +1044,32 @@
                             </div>
                         </div>
                         <div class="next-btn">
-                            <button class="btn btn-white" onclick="prevPage()">Back</button>
+                            <button class="btn btn-white" onclick="nextGalleryPage()">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="series-section" class="gallery-right" style="flex: 1; background-color: #d4e8a8; display: none; max-height: 650px; overflow-y: auto;">
+                        <div class="gallery-title">Favorite Series</div>
+                        <div class="gallery-books">
+                            <div>
+                                <div class="book-item"><img src="https://i.pinimg.com/1200x/2e/78/c2/2e78c2af60a98074ce884747d1d3b474.jpg" alt="Link Click"></div>
+                                <div class="book-label">Link Click</div>
+                            </div>
+                            <div>
+                                <div class="book-item"><img src="https://i.pinimg.com/1200x/93/88/89/9388895dd76dfc240a8e37a9143e6983.jpg" alt="Frieren"></div>
+                                <div class="book-label">Frieren</div>
+                            </div>
+                            <div>
+                                <div class="book-item"><img src="https://i.pinimg.com/736x/fb/ad/4f/fbad4f2a67a5f388659a7ca1e28c3a1e.jpg" alt="Bungou Stray Dogs"></div>
+                                <div class="book-label">Bungou Stray Dogs</div>
+                            </div>
+                            <div>
+                                <div class="book-item"><img src="https://i.pinimg.com/736x/9f/db/68/9fdb68c8651e529c811b12f79674558f.jpg" alt="Lord of the Mysteries"></div>
+                                <div class="book-label">Lord of the Mysteries</div>
+                            </div>
+                        </div>
+                        <div class="next-btn">
+                            <button class="btn btn-white" onclick="nextGalleryPage()">Next</button>
                         </div>
                     </div>
                 </div>
@@ -1035,12 +1169,35 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('editBtn').style.display = 'none';
+            // Show floating elements on landing page by default
+            const container = document.getElementById('container');
+            const floatingElements = document.getElementById('floatingElements');
+            container.classList.add('home-bg');
+            floatingElements.classList.add('show');
+            floatingElements.style.opacity = '1';
         });
 
         function navigateTo(pageId) {
             const pages = document.querySelectorAll('.page');
+            const container = document.getElementById('container');
+            const floatingElements = document.getElementById('floatingElements');
+            
             pages.forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
+            
+            // Update container background and floating elements based on page
+            if (pageId === 'landing' || pageId === 'home' || pageId === 'profile') {
+                container.classList.add('home-bg');
+                floatingElements.classList.add('show');
+                floatingElements.style.display = 'block';
+                floatingElements.style.visibility = 'visible';
+                floatingElements.style.opacity = '1';
+            } else {
+                container.classList.remove('home-bg');
+                floatingElements.classList.remove('show');
+                floatingElements.style.visibility = 'hidden';
+                floatingElements.style.opacity = '0';
+            }
             
             const editBtn = document.getElementById('editBtn');
             if (pageId === 'profile') {
@@ -1115,14 +1272,25 @@
             });
         }
 
-        function nextPage() {
-            document.getElementById('books-section').style.display = 'none';
-            document.getElementById('albums-section').style.display = 'block';
-        }
+        function nextGalleryPage() {
+            const booksSection = document.getElementById('books-section');
+            const albumsSection = document.getElementById('albums-section');
+            const seriesSection = document.getElementById('series-section');
 
-        function prevPage() {
-            document.getElementById('books-section').style.display = 'block';
-            document.getElementById('albums-section').style.display = 'none';
+            if (booksSection.style.display !== 'none') {
+                booksSection.style.display = 'none';
+                albumsSection.style.display = 'block';
+                seriesSection.style.display = 'none';
+            } else if (albumsSection.style.display !== 'none') {
+                booksSection.style.display = 'none';
+                albumsSection.style.display = 'none';
+                seriesSection.style.display = 'block';
+            } else {
+                // Loop back to books
+                booksSection.style.display = 'block';
+                albumsSection.style.display = 'none';
+                seriesSection.style.display = 'none';
+            }
         }
 
         function triggerFileInput(inputId) {
