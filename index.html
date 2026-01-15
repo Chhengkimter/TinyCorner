@@ -1692,6 +1692,19 @@
             }
         }
 
+        function toggleFollow() {
+            const followBtn = document.getElementById('followBtn');
+            if (followBtn.textContent === 'Follow') {
+                followBtn.textContent = 'Following';
+                followBtn.style.backgroundColor = '#FFB2BA';
+                alert('✅ You are now following Chheng Kimter!');
+            } else {
+                followBtn.textContent = 'Follow';
+                followBtn.style.backgroundColor = '#F3EBD8';
+                alert('❌ You unfollowed Chheng Kimter');
+            }
+        }
+
         function copyProfileLink(btn) {
             const profileLink = window.location.origin + window.location.pathname + '?profile=chhengkimter';
             navigator.clipboard.writeText(profileLink).then(() => {
@@ -1807,7 +1820,7 @@
                 alert('❌ Error creating corner. Please try again.');
             }
         }
-        
+
         function saveUserProfile(event) {
             event.preventDefault();
             
