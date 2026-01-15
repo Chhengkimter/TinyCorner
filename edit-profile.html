@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Your Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5ede0 0%, #ffd4e5 50%, #e8f4d4 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: #EA717D;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-yellow {
+            background-color: #D3D891;
+            color: #333;
+        }
+
+        .btn-yellow:hover {
+            background-color: #FFD0D0;
+        }
+
+        .btn-white {
+            background-color: rgba(255,255,255,0.6);
+            color: #333;
+        }
+
+        .btn-white:hover {
+            background-color: rgba(255,255,255,0.8);
+        }
+
+        .creation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .creation-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .creation-title {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #EA717D, #8D50DD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .creation-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .creation-form {
+            display: flex;
+            gap: 30px;
+        }
+
+        .form-left, .form-right {
+            flex: 1;
+        }
+
+        .section-box {
+            background-color: #ffc9d4;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .section-box.green {
+            background-color: #d4e8a8;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .avatar-upload {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            cursor: pointer;
+        }
+
+        .avatar-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #cccccc;
+            opacity: 0.5;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .avatar-upload.has-image .avatar-preview {
+            opacity: 1;
+        }
+
+        .avatar-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            color: #a5a5a5;
+            pointer-events: none;
+        }
+
+        .avatar-upload.has-image .avatar-icon {
+            display: none;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #333;
+            border-radius: 12px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #8D50DD;
+            background-color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .upload-item {
+            aspect-ratio: 1;
+            background-color: #cccccc;
+            opacity: 0.3;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .upload-item:hover {
+            opacity: 0.5;
+            transform: scale(1.05);
+        }
+
+        .upload-item.has-image {
+            opacity: 1;
+        }
+
+        .upload-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .upload-icon {
+            font-size: 40px;
+            color: #666;
+            pointer-events: none;
+        }
+
+        .upload-item.has-image .upload-icon {
+            display: none;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-picker {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .albums-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .album-upload {
+            aspect-ratio: 1;
+            background-color: #cccccc;
+            opacity: 0.3;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .album-upload:hover {
+            opacity: 0.5;
+            transform: scale(1.05);
+        }
+
+        .album-upload.has-image {
+            opacity: 1;
+        }
+
+        .album-upload img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hidden-input {
+            display: none;
+        }
+
+        .create-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #EA717D, #8D50DD);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(234, 113, 125, 0.3);
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(234, 113, 125, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .creation-form {
+                flex-direction: column;
+            }
+
+            .creation-title {
+                font-size: 36px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <button class="btn btn-yellow" onclick="goBack()">← Back to Profile</button>
+            </div>
+        </header>
+
+        <div class="creation-container">
+            <div class="creation-header">
+                <h1 class="creation-title">Edit Your Corner</h1>
+                <p class="creation-subtitle">Update your profile information ✨</p>
+            </div>
+
+            <form id="edit-form" class="creation-form" onsubmit="saveEditedProfile(event)">
+                <div class="form-left">
+                    <!-- Profile Information -->
+                    <div class="section-box">
+                        <h2 class="section-title">Profile Information</h2>
+                        
+                        <div class="avatar-upload" onclick="triggerEditUpload('edit-avatar-input')" id="edit-avatar-container">
+                            <img class="avatar-preview" id="edit-avatar-preview">
+                            <div class="avatar-icon">+</div>
+                            <input type="file" id="edit-avatar-input" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-avatar-preview', 'edit-avatar-container')">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Display Name *</label>
+                            <input type="text" class="form-input" id="edit-display-name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="edit-phone-number" placeholder="+855 12 345 678">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Birthday</label>
+                            <input type="text" class="form-input" id="edit-birthday" placeholder="MM/DD/YYYY">
+                        </div>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    <div class="section-box">
+                        <h2 class="section-title">Your Gallery</h2>
+                        
+                        <div class="gallery-grid">
+                            <div class="upload-item" onclick="triggerEditUpload('edit-gallery-1')" id="edit-gallery-container-0">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-gallery-1" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-gallery-img-0', 'edit-gallery-container-0')">
+                                <img id="edit-gallery-img-0" style="display: none;">
+                            </div>
+                            <div class="upload-item" onclick="triggerEditUpload('edit-gallery-2')" id="edit-gallery-container-1">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-gallery-2" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-gallery-img-1', 'edit-gallery-container-1')">
+                                <img id="edit-gallery-img-1" style="display: none;">
+                            </div>
+                            <div class="upload-item" onclick="triggerEditUpload('edit-gallery-3')" id="edit-gallery-container-2">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-gallery-3" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-gallery-img-2', 'edit-gallery-container-2')">
+                                <img id="edit-gallery-img-2" style="display: none;">
+                            </div>
+                        </div>
+
+                        <h3 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600;">Color Palette</h3>
+                        
+                        <div class="color-row">
+                            <input type="text" class="form-input" id="edit-color-name-0" placeholder="Color name" style="flex: 1;">
+                            <div class="color-preview" id="edit-color-preview-0"></div>
+                            <input type="color" class="color-picker" id="edit-color-0" oninput="updateEditColorPreview(0)">
+                        </div>
+
+                        <div class="color-row">
+                            <input type="text" class="form-input" id="edit-color-name-1" placeholder="Color name" style="flex: 1;">
+                            <div class="color-preview" id="edit-color-preview-1"></div>
+                            <input type="color" class="color-picker" id="edit-color-1" oninput="updateEditColorPreview(1)">
+                        </div>
+
+                        <div class="color-row">
+                            <input type="text" class="form-input" id="edit-color-name-2" placeholder="Color name" style="flex: 1;">
+                            <div class="color-preview" id="edit-color-preview-2"></div>
+                            <input type="color" class="color-picker" id="edit-color-2" oninput="updateEditColorPreview(2)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-right">
+                    <!-- Favorites Section -->
+                    <div class="section-box green">
+                        <div class="form-group">
+                            <label class="form-label">Collection Title</label>
+                            <input type="text" class="form-input" id="edit-collection-title" placeholder="e.g., Favorite Books, Favorite Movies">
+                        </div>
+
+                        <h3 style="font-size: 16px; color: #333; margin: 20px 0 15px; font-weight: 600;">Add Your Favorites</h3>
+
+                        <div class="albums-grid">
+                            <div class="album-upload" onclick="triggerEditUpload('edit-album-1')" id="edit-album-container-0">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-album-1" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-0', 'edit-album-container-0')">
+                                <img id="edit-album-img-0" style="display: none;">
+                            </div>
+                            <div class="album-upload" onclick="triggerEditUpload('edit-album-2')" id="edit-album-container-1">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-album-2" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-1', 'edit-album-container-1')">
+                                <img id="edit-album-img-1" style="display: none;">
+                            </div>
+                            <div class="album-upload" onclick="triggerEditUpload('edit-album-3')" id="edit-album-container-2">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-album-3" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-2', 'edit-album-container-2')">
+                                <img id="edit-album-img-2" style="display: none;">
+                            </div>
+                            <div class="album-upload" onclick="triggerEditUpload('edit-album-4')" id="edit-album-container-3">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="edit-album-4" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-3', 'edit-album-container-3')">
+                                <img id="edit-album-img-3" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- About Section -->
+                    <div class="section-box green">
+                        <h2 class="section-title">About You</h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Bio / Description</label>
+                            <textarea class="form-input" id="edit-bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Interests (comma separated)</label>
+                            <input type="text" class="form-input" id="edit-interests" placeholder="e.g., Reading, Music, Art, Travel">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="create-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Load profile data when page opens
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEditProfile();
+        });
+
+        function loadEditProfile() {
+            const cornerData = JSON.parse(sessionStorage.getItem('newCorner'));
+            
+            if (!cornerData) {
+                alert('No profile found. Please create a corner first.');
+                window.location.href = 'new-profile.html';
+                return;
+            }
+            
+            // Fill basic info
+            document.getElementById('edit-display-name').value = cornerData.displayName || '';
+            document.getElementById('edit-phone-number').value = cornerData.phoneNumber || '';
+            document.getElementById('edit-birthday').value = cornerData.birthday || '';
+            document.getElementById('edit-collection-title').value = cornerData.collectionTitle || 'Favorite Collection';
+            document.getElementById('edit-bio').value = cornerData.bio || '';
+            document.getElementById('edit-interests').value = cornerData.interests || '';
+            
+            // Load avatar
+            if (cornerData.avatar) {
+                const avatarPreview = document.getElementById('edit-avatar-preview');
+                avatarPreview.src = cornerData.avatar;
+                avatarPreview.style.opacity = '1';
+                document.getElementById('edit-avatar-container').classList.add('has-image');
+            }
+            
+            // Load gallery images
+            if (cornerData.gallery && cornerData.gallery.length > 0) {
+                cornerData.gallery.forEach((imgSrc, index) => {
+                    const container = document.getElementById(`edit-gallery-container-${index}`);
+                    const img = document.getElementById(`edit-gallery-img-${index}`);
+                    if (container && img) {
+                        img.src = imgSrc;
+                        img.style.display = 'block';
+                        container.classList.add('has-image');
+                    }
+                });
+            }
+            
+            // Load favorite images
+            if (cornerData.favorites && cornerData.favorites.length > 0) {
+                cornerData.favorites.forEach((imgSrc, index) => {
+                    const container = document.getElementById(`edit-album-container-${index}`);
+                    const img = document.getElementById(`edit-album-img-${index}`);
+                    if (container && img) {
+                        img.src = imgSrc;
+                        img.style.display = 'block';
+                        container.classList.add('has-image');
+                    }
+                });
+            }
+            
+            // Load colors
+            if (cornerData.colors && cornerData.colors.length > 0) {
+                cornerData.colors.forEach((color, index) => {
+                    const nameEl = document.getElementById(`edit-color-name-${index}`);
+                    const colorEl = document.getElementById(`edit-color-${index}`);
+                    const previewEl = document.getElementById(`edit-color-preview-${index}`);
+                    
+                    if (nameEl) nameEl.value = color.name || '';
+                    if (colorEl) colorEl.value = color.value || '#000000';
+                    if (previewEl) previewEl.style.backgroundColor = color.value || '#000000';
+                });
+            }
+        }
+
+        function triggerEditUpload(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function handleEditImageUpload(input, previewId, containerId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(previewId);
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    
+                    if (containerId) {
+                        const container = document.getElementById(containerId);
+                        container.classList.add('has-image');
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function updateEditColorPreview(colorNum) {
+            const colorInput = document.getElementById(`edit-color-${colorNum}`);
+            const preview = document.getElementById(`edit-color-preview-${colorNum}`);
+            preview.style.backgroundColor = colorInput.value;
+        }
+
+        function saveEditedProfile(event) {
+            event.preventDefault();
+            
+            try {
+                // Collect gallery images
+                const gallery = [];
+                for (let i = 0; i < 3; i++) {
+                    const img = document.getElementById(`edit-gallery-img-${i}`);
+                    if (img && img.src && img.src !== '') {
+                        gallery.push(img.src);
+                    }
+                }
+                
+                // Collect favorite images
+                const favorites = [];
+                for (let i = 0; i < 4; i++) {
+                    const img = document.getElementById(`edit-album-img-${i}`);
+                    if (img && img.src && img.src !== '') {
+                        favorites.push(img.src);
+                    }
+                }
+                
+                // Collect colors
+                const colors = [];
+                for (let i = 0; i < 3; i++) {
+                    const nameEl = document.getElementById(`edit-color-name-${i}`);
+                    const colorEl = document.getElementById(`edit-color-${i}`);
+                    if (nameEl && colorEl) {
+                        colors.push({
+                            name: nameEl.value || 'Color',
+                            value: colorEl.value || '#000000'
+                        });
+                    }
+                }
+                
+                const updatedData = {
+                    displayName: document.getElementById('edit-display-name').value || 'User',
+                    phoneNumber: document.getElementById('edit-phone-number').value || '',
+                    birthday: document.getElementById('edit-birthday').value || '',
+                    avatar: document.getElementById('edit-avatar-preview').src || '',
+                    gallery: gallery,
+                    favorites: favorites,
+                    collectionTitle: document.getElementById('edit-collection-title').value || 'Favorite Collection',
+                    colors: colors,
+                    bio: document.getElementById('edit-bio').value || '',
+                    interests: document.getElementById('edit-interests').value || ''
+                };
+                
+                sessionStorage.setItem('newCorner', JSON.stringify(updatedData));
+                alert('✅ Profile updated successfully!');
+                window.location.href = 'new-profile.html';
+                
+            } catch (error) {
+                console.error('Error saving profile:', error);
+                alert('❌ Error updating profile: ' + error.message);
+            }
+        }
+
+        function goBack() {
+            window.location.href = 'new-profile.html';
+        }
+    </script>
+</body>
+</html>

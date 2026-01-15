@@ -332,12 +332,8 @@
                 <!-- Gallery Section -->
                 <div class="gallery-section">
                     <div class="gallery-title">My Gallery</div>
-                    <div class="gallery-grid" id="galleryGrid">
-                        <!-- Will be populated by JS -->
-                    </div>
-                    <div class="color-palette" id="colorPalette">
-                        <!-- Will be populated by JS -->
-                    </div>
+                    <div class="gallery-grid" id="galleryGrid"></div>
+                    <div class="color-palette" id="colorPalette"></div>
                 </div>
             </div>
 
@@ -346,9 +342,7 @@
                 <!-- Favorites Section -->
                 <div class="favorites-section">
                     <div class="gallery-title" id="collectionTitle">Favorite Collection</div>
-                    <div class="favorites-grid" id="favoritesGrid">
-                        <!-- Will be populated by JS -->
-                    </div>
+                    <div class="favorites-grid" id="favoritesGrid"></div>
                 </div>
 
                 <!-- Bio Section -->
@@ -366,13 +360,13 @@
     </div>
 
     <script>
-        // Load user data from localStorage when page loads
+        
         document.addEventListener('DOMContentLoaded', function() {
             loadUserProfile();
         });
 
-        function loadUserProfile() {
-            const cornerData = JSON.parse(localStorage.getItem('newCorner'));
+        function loadUserProfile() {    
+            const cornerData = JSON.parse(sessionStorage.getItem('newCorner'));
             
             if (!cornerData) {
                 document.querySelector('.profile-wrapper').innerHTML = '<div class="empty-state">No profile data found. Please create a corner first.</div>';
@@ -442,11 +436,11 @@
         }
 
         function goHome() {
-            window.location.href = 'index.html'; // Change to your main page URL
+            window.location.href = 'index.html'; 
         }
 
         function editProfile() {
-            alert('Edit feature coming soon!');
+            window.location.href = 'edit-profile.html';
         }
 
         function copyLink() {

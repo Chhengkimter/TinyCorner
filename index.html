@@ -295,7 +295,7 @@
             overflow: hidden;
         }
 
-        /* Header/Navbar */
+        /*Navbar*/
         header {
             background-color: #EA717D;
             padding: 15px 40px;
@@ -1004,9 +1004,7 @@
 
         <!-- Header -->
         <header>
-            <div class="header-left"> 
-                <!--button id="editBtn" class="btn btn-yellow" onclick="handleEditClick()">Edit</button-->
-            </div>
+            <div class="header-left"> </div>
             <div class="header-left">
                 <button class="btn btn-yellow" onclick="navigateTo('landing')">Home</button>
                 <button class="btn btn-yellow" onclick="navigateTo('home')">Search</button>
@@ -1018,7 +1016,7 @@
             </div>
         </header>
 
-        <!-- Landing Page -->
+        <!-- Profile CHhengKimter -->
         <div id="landing" class="page active">
             <div style="display: flex; flex-direction: column; justify-content: space-between; align-items: center; flex: 1; padding: 60px 40px; gap: 50px;">
                 <!-- Hero Section -->
@@ -1478,98 +1476,177 @@
             </div>
         </div>
 
-        <!-- Edit Profile Page -->
-        <div id="edit" class="page">
-            <div class="profile-container">
-                <div style="display: flex; gap: 20px; align-items: flex-start;">
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 20px;">
-                        <div class="edit-header">
-                            <div class="edit-avatar" onclick="triggerFileInput('avatar-input')">
-                                <img class="profile-avatar-edit" id="avatar-preview">
-                                <div class="edit-add-icon">+</div>
-                                <input type="file" id="avatar-input" class="hidden-file-input" accept="image/*" onchange="addImage(document.getElementById('avatar-input'), 'avatar-input')">
-                            </div>
-                            <div class="edit-info">
-                                <div class="edit-form-group">
-                                    <label class="edit-form-label">Display Name</label>
-                                    <input type="text" class="edit-form-input" id="edit-name" value="Chheng Kimter">
-                                </div>
-                                <div class="edit-form-group">
-                                    <label class="edit-form-label">Phone Number</label>
-                                    <input type="text" class="edit-form-input" id="edit-phone" value="+855 12 345 678">
-                                </div>
-                                <div class="edit-form-group">
-                                    <label class="edit-form-label">Birthday</label>
-                                    <input type="text" class="edit-form-input" id="edit-date" value="04/24/2000">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="edit-left" style="flex: 1; background-color: #ffc9d4;">
-                            <div class="gallery-title">Gallery</div>
-                            <div class="edit-gallery">
-                                <div class="edit-item" onclick="triggerFileInput('gallery-item-0')">
-                                    <span class="edit-item-add">+</span>
-                                    <input type="file" id="gallery-item-0" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-0')">
-                                </div>
-                                <div class="edit-item" onclick="triggerFileInput('gallery-item-1')">
-                                    <span class="edit-item-add">+</span>
-                                    <input type="file" id="gallery-item-1" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-1')">
-                                </div>
-                                <div class="edit-item" onclick="triggerFileInput('gallery-item-2')">
-                                    <span class="edit-item-add">+</span>
-                                    <input type="file" id="gallery-item-2" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'gallery-item-2')">
-                                </div>
-                            </div>
-                            <div class="color-selector" style="flex-direction: column; gap: 15px;">
-                                <div class="color-item" style="gap: 15px;">
-                                    <input type="text" class="edit-form-input color-name-input" id="color-name-0" value="Black" style="flex: 1; padding: 8px;">
-                                    <div class="color-circle" id="color-circle-0" style="width: 35px; height: 35px; background-color: #000000; border-radius: 50%;"></div>
-                                    <input type="color" id="color-value-0" value="#000000" onchange="updateColorCircle(0)" oninput="updateColorCircle(0)" style="width: 50px; height: 35px; border: none; border-radius: 8px; cursor: pointer;">
-                                </div>
-                                <div class="color-item" style="gap: 15px;">
-                                    <input type="text" class="edit-form-input color-name-input" id="color-name-1" value="Pink" style="flex: 1; padding: 8px;">
-                                    <div class="color-circle" id="color-circle-1" style="width: 35px; height: 35px; background-color: #FFB2BA; border-radius: 50%;"></div>
-                                    <input type="color" id="color-value-1" value="#FFB2BA" onchange="updateColorCircle(1)" oninput="updateColorCircle(1)" style="width: 50px; height: 35px; border: none; border-radius: 8px; cursor: pointer;">
-                                </div>
-                                <div class="color-item" style="gap: 15px;">
-                                    <input type="text" class="edit-form-input color-name-input" id="color-name-2" value="Sky Blue" style="flex: 1; padding: 8px;">
-                                    <div class="color-circle" id="color-circle-2" style="width: 35px; height: 35px; background-color: #87ceeb; border-radius: 50%;"></div>
-                                    <input type="color" id="color-value-2" value="#87ceeb" onchange="updateColorCircle(2)" oninput="updateColorCircle(2)" style="width: 50px; height: 35px; border: none; border-radius: 8px; cursor: pointer;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="edit-right" style="flex: 1; background-color: #d4e8a8;">
-                        <input type="text" class="edit-title-input" id="album-title-input" value="Favorite Album" maxlength="30">
-                        <div class="edit-albums-grid">
-                            <div class="edit-album-item" onclick="triggerFileInput('album-item-0')">
-                                <span class="edit-item-add">+</span>
-                                <input type="file" id="album-item-0" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-0')">
-                            </div>
-                            <div class="edit-album-item" onclick="triggerFileInput('album-item-1')">
-                                <span class="edit-item-add">+</span>
-                                <input type="file" id="album-item-1" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-1')">
-                            </div>
-                            <div class="edit-album-item" onclick="triggerFileInput('album-item-2')">
-                                <span class="edit-item-add">+</span>
-                                <input type="file" id="album-item-2" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-2')">
-                            </div>
-                            <div class="edit-album-item" onclick="triggerFileInput('album-item-3')">
-                                <span class="edit-item-add">+</span>
-                                <input type="file" id="album-item-3" class="hidden-file-input" accept="image/*" onchange="addImage(this, 'album-item-3')">
-                            </div>
-                        </div>
-                    </div>
+        
+    <!-- Edit Profile Page -->
+<div id="edit" class="page">
+    <div class="profile-container">
+        <div style="padding: 0; overflow-y: auto; flex: 1;">
+            <div class="creation-container">
+                <div class="creation-header">
+                    <h1 class="creation-title">Edit Your Corner</h1>
+                    <p class="creation-subtitle">Update your profile information ✨</p>
                 </div>
+
+                <form id="edit-form" class="creation-form" onsubmit="saveEditedProfile(event)">
+                    <div class="form-left">
+                        <!-- Profile Information -->
+                        <div class="section-box">
+                            <h2 class="section-title">Profile Information</h2>
+                            
+                            <div class="avatar-upload" onclick="triggerEditUpload('edit-avatar-input')" id="edit-avatar-container">
+                                <img class="avatar-preview" id="edit-avatar-preview">
+                                <div class="avatar-icon">+</div>
+                                <input type="file" id="edit-avatar-input" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-avatar-preview', 'edit-avatar-container')">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Display Name *</label>
+                                <input type="text" class="form-input" id="edit-display-name" placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" id="edit-phone-number" placeholder="+855 12 345 678">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Birthday</label>
+                                <input type="text" class="form-input" id="edit-birthday" placeholder="MM/DD/YYYY">
+                            </div>
+                        </div>
+
+                        <!-- Gallery Section -->
+                        <div class="section-box">
+                            <h2 class="section-title">Your Gallery</h2>
+                            
+                            <div class="gallery-grid">
+                                <div class="upload-item" onclick="triggerEditUpload('edit-gallery-1')" id="edit-gallery-container-0">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-gallery-1" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-gallery-img-0', 'edit-gallery-container-0')">
+                                    <img id="edit-gallery-img-0" style="display: none;">
+                                </div>
+                                <div class="upload-item" onclick="triggerEditUpload('edit-gallery-2')" id="edit-gallery-container-1">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-gallery-2" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-gallery-img-1', 'edit-gallery-container-1')">
+                                    <img id="edit-gallery-img-1" style="display: none;">
+                                </div>
+                                <div class="upload-item" onclick="triggerEditUpload('edit-gallery-3')" id="edit-gallery-container-2">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-gallery-3" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-gallery-img-2', 'edit-gallery-container-2')">
+                                    <img id="edit-gallery-img-2" style="display: none;">
+                                </div>
+                            </div>
+
+                            <h3 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600;">Color Palette</h3>
+                            
+                            <div class="color-row">
+                                <input type="text" class="form-input" id="edit-color-name-0" placeholder="Color name" style="flex: 1;">
+                                <div class="color-preview" id="edit-color-preview-0"></div>
+                                <input type="color" class="color-picker" id="edit-color-0" oninput="updateEditColorPreview(0)">
+                            </div>
+
+                            <div class="color-row">
+                                <input type="text" class="form-input" id="edit-color-name-1" placeholder="Color name" style="flex: 1;">
+                                <div class="color-preview" id="edit-color-preview-1"></div>
+                                <input type="color" class="color-picker" id="edit-color-1" oninput="updateEditColorPreview(1)">
+                            </div>
+
+                            <div class="color-row">
+                                <input type="text" class="form-input" id="edit-color-name-2" placeholder="Color name" style="flex: 1;">
+                                <div class="color-preview" id="edit-color-preview-2"></div>
+                                <input type="color" class="color-picker" id="edit-color-2" oninput="updateEditColorPreview(2)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-right">
+                        <!-- Favorites Section -->
+                        <div class="section-box green">
+                            <div class="form-group">
+                                <label class="form-label">Collection Title</label>
+                                <input type="text" class="form-input" id="edit-collection-title" placeholder="e.g., Favorite Books, Favorite Movies">
+                            </div>
+
+                            <h3 style="font-size: 16px; color: #333; margin: 20px 0 15px; font-weight: 600;">Add Your Favorites</h3>
+
+                            <div class="albums-grid">
+                                <div class="album-upload" onclick="triggerEditUpload('edit-album-1')" id="edit-album-container-0">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-album-1" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-0', 'edit-album-container-0')">
+                                    <img id="edit-album-img-0" style="display: none;">
+                                </div>
+                                <div class="album-upload" onclick="triggerEditUpload('edit-album-2')" id="edit-album-container-1">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-album-2" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-1', 'edit-album-container-1')">
+                                    <img id="edit-album-img-1" style="display: none;">
+                                </div>
+                                <div class="album-upload" onclick="triggerEditUpload('edit-album-3')" id="edit-album-container-2">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-album-3" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-2', 'edit-album-container-2')">
+                                    <img id="edit-album-img-2" style="display: none;">
+                                </div>
+                                <div class="album-upload" onclick="triggerEditUpload('edit-album-4')" id="edit-album-container-3">
+                                    <span class="upload-icon">+</span>
+                                    <input type="file" id="edit-album-4" class="hidden-input" accept="image/*" onchange="handleEditImageUpload(this, 'edit-album-img-3', 'edit-album-container-3')">
+                                    <img id="edit-album-img-3" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- About Section -->
+                        <div class="section-box green">
+                            <h2 class="section-title">About You</h2>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Bio / Description</label>
+                                <textarea class="form-input" id="edit-bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Interests (comma separated)</label>
+                                <input type="text" class="form-input" id="edit-interests" placeholder="e.g., Reading, Music, Art, Travel">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="create-btn">Save Changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <script>
 
-        
+        function triggerUpload(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function handleImageUpload(input, previewId, containerId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Show preview
+                    const preview = document.getElementById(previewId);
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    
+                    // Mark container as has-image
+                    if (containerId) {
+                        const container = document.getElementById(containerId);
+                        container.classList.add('has-image');
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function updateCreationColorPreview(colorNum) {
+            const colorInput = document.getElementById(`creation-color-${colorNum}`);
+            const preview = document.getElementById(`creation-color-preview-${colorNum}`);
+            preview.style.backgroundColor = colorInput.value;
+        }
+
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('editBtn').style.display = 'none';
@@ -1677,20 +1754,120 @@
         function saveUserProfile(event) {
             event.preventDefault();
             
-            // Collect all form data
-            const userData = {
-                displayName: document.getElementById('creation-display-name').value,
-                phoneNumber: document.getElementById('creation-phone-number').value,
-                birthday: document.getElementById('creation-birthday').value,
-                avatar: document.getElementById('creation-avatar-preview').src,
-                // ... collect all other fields
-            };
+            try {
+                // Collect gallery images
+                const gallery = [];
+                for (let i = 1; i <= 3; i++) {
+                    const img = document.getElementById(`creation-gallery-img-${i}`);
+                    if (img && img.src && img.src !== '') {
+                        gallery.push(img.src);
+                    }
+                }
+                
+                // Collect favorite images
+                const favorites = [];
+                for (let i = 1; i <= 4; i++) {
+                    const img = document.getElementById(`creation-album-img-${i}`);
+                    if (img && img.src && img.src !== '') {
+                        favorites.push(img.src);
+                    }
+                }
+                
+                // Collect colors
+                const colors = [];
+                for (let i = 1; i <= 3; i++) {
+                    const nameEl = document.getElementById(`creation-color-name-${i}`);
+                    const colorEl = document.getElementById(`creation-color-${i}`);
+                    if (nameEl && colorEl) {
+                        colors.push({
+                            name: nameEl.value || 'Color',
+                            value: colorEl.value || '#000000'
+                        });
+                    }
+                }
+                
+                const userData = {
+                    displayName: document.getElementById('creation-display-name').value || 'User',
+                    phoneNumber: document.getElementById('creation-phone-number').value || '',
+                    birthday: document.getElementById('creation-birthday').value || '',
+                    avatar: document.getElementById('creation-avatar-preview').src || '',
+                    gallery: gallery,
+                    favorites: favorites,
+                    collectionTitle: document.getElementById('creation-collection-title').value || 'Favorite Collection',
+                    colors: colors,
+                    bio: document.getElementById('creation-bio').value || '',
+                    interests: document.getElementById('creation-interests').value || ''
+                };
+                
+                sessionStorage.setItem('newCorner', JSON.stringify(userData));
+                alert('✅ Your corner created successfully!');
+                window.location.href = 'new-profile.html';
+            } catch (error) {
+                console.error('Error saving profile:', error);
+                alert('❌ Error creating corner. Please try again.');
+            }
+        }
+        
+        function saveUserProfile(event) {
+            event.preventDefault();
             
-            // Save to localStorage
-            localStorage.setItem('newCorner', JSON.stringify(userData));
-            
-            // Redirect to profile
-            window.location.href = 'new-profile.html';
+            try {
+                // Log to check if function is being called
+                console.log('Saving profile...');
+                
+                // Collect gallery images
+                const gallery = [];
+                for (let i = 1; i <= 3; i++) {
+                    const img = document.getElementById(`creation-gallery-img-${i}`);
+                    console.log(`Gallery ${i}:`, img);
+                    if (img && img.src && img.src !== '') {
+                        gallery.push(img.src);
+                    }
+                }
+                
+                console.log('Gallery collected:', gallery);
+                
+                // Collect favorite images
+                const favorites = [];
+                for (let i = 1; i <= 4; i++) {
+                    const img = document.getElementById(`creation-album-img-${i}`);
+                    if (img && img.src && img.src !== '') {
+                        favorites.push(img.src);
+                    }
+                }
+                
+                console.log('Favorites collected:', favorites);
+                
+                // Check display name (required field)
+                const displayName = document.getElementById('creation-display-name');
+                console.log('Display name element:', displayName);
+                if (!displayName) {
+                    throw new Error('Display name field not found');
+                }
+                
+                const userData = {
+                    displayName: displayName.value || 'User',
+                    phoneNumber: document.getElementById('creation-phone-number')?.value || '',
+                    birthday: document.getElementById('creation-birthday')?.value || '',
+                    avatar: document.getElementById('creation-avatar-preview')?.src || '',
+                    gallery: gallery,
+                    favorites: favorites,
+                    collectionTitle: document.getElementById('creation-collection-title')?.value || 'Favorite Collection',
+                    colors: [],
+                    bio: document.getElementById('creation-bio')?.value || '',
+                    interests: document.getElementById('creation-interests')?.value || ''
+                };
+                
+                console.log('User data to save:', userData);
+                
+                sessionStorage.setItem('newCorner', JSON.stringify(userData));
+                alert('✅ Your corner created successfully!');
+                window.location.href = 'new-profile.html';
+                
+            } catch (error) {
+                console.error('Full error:', error);
+                alert('❌ Error: ' + error.message);
+            }
         }
     </script>
 </body>
