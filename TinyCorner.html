@@ -5,6 +5,271 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TinyCorner_byChhengKimter</title>
     <style>
+.creation-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.creation-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.creation-title {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #EA717D, #8D50DD);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.creation-subtitle {
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+}
+
+.creation-form {
+    display: flex;
+    gap: 30px;
+}
+
+.form-left, .form-right {
+    flex: 1;
+}
+
+.section-box {
+    background-color: #ffc9d4;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.section-box.green {
+    background-color: #d4e8a8;
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.avatar-upload {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 30px;
+    cursor: pointer;
+}
+
+.avatar-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #cccccc;
+    opacity: 0.5;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+}
+
+.avatar-upload.has-image .avatar-preview {
+    opacity: 1;
+}
+
+.avatar-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: #a5a5a5;
+    pointer-events: none;
+}
+
+.avatar-upload.has-image .avatar-icon {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #333;
+    border-radius: 12px;
+    font-size: 14px;
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #8D50DD;
+    background-color: white;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.upload-item {
+    aspect-ratio: 1;
+    background-color: #cccccc;
+    opacity: 0.3;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.upload-item:hover {
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+.upload-item.has-image {
+    opacity: 1;
+}
+
+.upload-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.upload-icon {
+    font-size: 40px;
+    color: #666;
+    pointer-events: none;
+}
+
+.upload-item.has-image .upload-icon {
+    display: none;
+}
+
+.color-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.color-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.color-picker {
+    width: 60px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.album-upload {
+    aspect-ratio: 1;
+    background-color: #cccccc;
+    opacity: 0.3;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.album-upload:hover {
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+.album-upload.has-image {
+    opacity: 1;
+}
+
+.album-upload img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.album-upload.has-image .upload-icon {
+    display: none;
+}
+
+.hidden-input {
+    display: none;
+}
+
+.create-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #EA717D, #8D50DD);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(234, 113, 125, 0.3);
+}
+
+.create-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(234, 113, 125, 0.4);
+}
+
+@media (max-width: 768px) {
+    .creation-form {
+        flex-direction: column;
+    }
+
+    .creation-title {
+        font-size: 36px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
         * {
             margin: 0;
             padding: 0;
@@ -739,13 +1004,13 @@
 
         <!-- Header -->
         <header>
-            <div class="header-left">
-                <button id="editBtn" class="btn btn-yellow" onclick="handleEditClick()">Edit</button>
+            <div class="header-left"> 
+                <!--button id="editBtn" class="btn btn-yellow" onclick="handleEditClick()">Edit</button-->
             </div>
             <div class="header-left">
                 <button class="btn btn-yellow" onclick="navigateTo('landing')">Home</button>
                 <button class="btn btn-yellow" onclick="navigateTo('home')">Search</button>
-                <button class="btn btn-yellow" onclick="navigateTo('profile')">Profile</button>
+                <button class="btn btn-yellow" onclick="navigateTo(window.location.href = 'new-profile.html')">Profile</button>
             </div>
             <div class="header-right">
                 <button class="btn btn-white" onclick="navigateTo('login')">Log In</button>
@@ -780,7 +1045,7 @@
 
                 <!-- Call to Action -->
                 <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%;">
-                    <button class="btn btn-pink" onclick="navigateTo('profile')" style="padding: 18px 50px; font-size: 18px; font-weight: 600; box-shadow: 0 8px 20px rgba(242, 151, 160, 0.3); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">Create Your Corner</button>
+                    <button class="btn btn-pink" onclick="navigateTo('signup')" style="padding: 18px 50px; font-size: 18px; font-weight: 600; box-shadow: 0 8px 20px rgba(242, 151, 160, 0.3); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">Create Your Corner</button>
                     <button class="btn btn-yellow" onclick="navigateTo('home')" style="padding: 18px 50px; font-size: 18px; font-weight: 600; box-shadow: 0 8px 20px rgba(211, 216, 145, 0.3); transition: transform 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='translateY(0)'">Explore Others</button>
                 </div>
 
@@ -833,7 +1098,7 @@
                     </div>
                     <div style="font-size: 24px;">→</div>
                 </div>
-                <div class="user-item" onclick="navigateTo('profile')" style="animation: slideIn 0.5s ease 0.1s both;">
+                <div class="user-item"  style="animation: slideIn 0.5s ease 0.1s both;">
                     <img class="user-avatar" src="https://i.pinimg.com/736x/6a/68/5a/6a685a9ac477debba2d64fae509864f6.jpg" alt="Hawkeye">
                     <div style="flex: 1;">
                         <div class="user-name">Hawkeye</div>
@@ -939,7 +1204,7 @@
                         <label class="form-label">Password</label>
                         <input type="password" class="form-input" placeholder="">
                     </div>
-                    <button class="auth-btn" onclick="navigateTo('profile')">Sign Up</button>
+                    <button class="auth-btn" onclick="navigateTo('creation')">Sign Up</button>
                 </div>
                 <div class="auth-footer" style="margin-top: 30px;">
                     Already have an account? 
@@ -947,6 +1212,143 @@
                 </div>
             </div>
         </div>
+
+        <!-- Creation Page  -->
+        <div id="creation" class="page">
+        <div style="padding: 0; overflow-y: auto; flex: 1;">
+            <div class="creation-container" style="max-width: 1200px; margin: 0 auto; padding: 40px;">
+                <div class="creation-header">
+                    <h1 class="creation-title">Create Your Corner</h1>
+                    <p class="creation-subtitle">Tell the world what makes you unique ✨</p>
+                </div>
+
+            <form class="creation-form" onsubmit="saveUserProfile(event)">
+                <div class="form-left">
+                    <!-- Profile Information -->
+                    <div class="section-box">
+                        <h2 class="section-title">Profile Information</h2>
+                        
+                        <div class="avatar-upload" onclick="triggerUpload('creation-avatar-input')" id="creation-avatar-container">
+                            <img class="avatar-preview" id="creation-avatar-preview">
+                            <div class="avatar-icon">+</div>
+                            <input type="file" id="creation-avatar-input" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-avatar-preview', 'creation-avatar-container')">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Display Name *</label>
+                            <input type="text" class="form-input" id="creation-display-name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" id="creation-phone-number" placeholder="+855 12 345 678">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Birthday</label>
+                            <input type="text" class="form-input" id="creation-birthday" placeholder="MM/DD/YYYY">
+                        </div>
+                    </div>
+
+                    <!-- Gallery Section -->
+                    <div class="section-box">
+                        <h2 class="section-title">Your Gallery</h2>
+                        
+                        <div class="gallery-grid">
+                            <div class="upload-item" onclick="triggerUpload('creation-gallery-1')" id="creation-gallery-container-1">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-gallery-1" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-gallery-img-1', 'creation-gallery-container-1')">
+                                <img id="creation-gallery-img-1" style="display: none;">
+                            </div>
+                            <div class="upload-item" onclick="triggerUpload('creation-gallery-2')" id="creation-gallery-container-2">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-gallery-2" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-gallery-img-2', 'creation-gallery-container-2')">
+                                <img id="creation-gallery-img-2" style="display: none;">
+                            </div>
+                            <div class="upload-item" onclick="triggerUpload('creation-gallery-3')" id="creation-gallery-container-3">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-gallery-3" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-gallery-img-3', 'creation-gallery-container-3')">
+                                <img id="creation-gallery-img-3" style="display: none;">
+                            </div>
+                        </div>
+
+                        <h3 style="font-size: 16px; color: #333; margin-bottom: 15px; font-weight: 600;">Color Palette</h3>
+                        
+                        <div class="color-row">
+                            <input type="text" class="form-input" id="creation-color-name-1" placeholder="Color name" value="Black" style="flex: 1;">
+                            <div class="color-preview" id="creation-color-preview-1" style="background-color: #000000;"></div>
+                            <input type="color" class="color-picker" id="creation-color-1" value="#000000" oninput="updateCreationColorPreview(1)">
+                        </div>
+
+                        <div class="color-row">
+                            <input type="text" class="form-input" id="creation-color-name-2" placeholder="Color name" value="Pink" style="flex: 1;">
+                            <div class="color-preview" id="creation-color-preview-2" style="background-color: #FFB2BA;"></div>
+                            <input type="color" class="color-picker" id="creation-color-2" value="#FFB2BA" oninput="updateCreationColorPreview(2)">
+                        </div>
+
+                        <div class="color-row">
+                            <input type="text" class="form-input" id="creation-color-name-3" placeholder="Color name" value="Sky Blue" style="flex: 1;">
+                            <div class="color-preview" id="creation-color-preview-3" style="background-color: #87CEEB;"></div>
+                            <input type="color" class="color-picker" id="creation-color-3" value="#87CEEB" oninput="updateCreationColorPreview(3)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-right">
+                    <!-- Favorites Section -->
+                    <div class="section-box green">
+                        <div class="form-group">
+                            <label class="form-label">Collection Title</label>
+                            <input type="text" class="form-input" id="creation-collection-title" placeholder="e.g., Favorite Books, Favorite Movies" value="Favorite Album">
+                        </div>
+
+                        <h3 style="font-size: 16px; color: #333; margin: 20px 0 15px; font-weight: 600;">Add Your Favorites</h3>
+
+                        <div class="albums-grid">
+                            <div class="album-upload" onclick="triggerUpload('creation-album-1')" id="creation-album-container-1">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-album-1" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-album-img-1', 'creation-album-container-1')">
+                                <img id="creation-album-img-1" style="display: none;">
+                            </div>
+                            <div class="album-upload" onclick="triggerUpload('creation-album-2')" id="creation-album-container-2">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-album-2" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-album-img-2', 'creation-album-container-2')">
+                                <img id="creation-album-img-2" style="display: none;">
+                            </div>
+                            <div class="album-upload" onclick="triggerUpload('creation-album-3')" id="creation-album-container-3">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-album-3" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-album-img-3', 'creation-album-container-3')">
+                                <img id="creation-album-img-3" style="display: none;">
+                            </div>
+                            <div class="album-upload" onclick="triggerUpload('creation-album-4')" id="creation-album-container-4">
+                                <span class="upload-icon">+</span>
+                                <input type="file" id="creation-album-4" class="hidden-input" accept="image/*" onchange="handleImageUpload(this, 'creation-album-img-4', 'creation-album-container-4')">
+                                <img id="creation-album-img-4" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- About Section -->
+                    <div class="section-box green">
+                        <h2 class="section-title">About You</h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Bio / Description</label>
+                            <textarea class="form-input" id="creation-bio" rows="4" placeholder="Tell us about yourself, your interests, passions..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Interests (comma separated)</label>
+                            <input type="text" class="form-input" id="creation-interests" placeholder="e.g., Reading, Music, Art, Travel">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="create-btn">Create My Corner</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
         <!-- Profile Page -->
         <div id="profile" class="page">
@@ -1166,6 +1568,8 @@
     </div>
 
     <script>
+
+        
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('editBtn').style.display = 'none';
@@ -1209,54 +1613,6 @@
             } else {
                 editBtn.style.display = 'none';
             }
-        }
-
-        function handleEditClick() {
-            const currentPage = document.querySelector('.page.active').id;
-            if (currentPage === 'profile') {
-                navigateTo('edit');
-            } else if (currentPage === 'edit') {
-                saveProfile();
-                navigateTo('profile');
-            }
-        }
-
-        function saveProfile() {
-            const name = document.getElementById('edit-name').value;
-            const phone = document.getElementById('edit-phone').value;
-            const date = document.getElementById('edit-date').value;
-
-            document.getElementById('display-name').textContent = name;
-            document.getElementById('display-phone').textContent = phone;
-            document.getElementById('display-date').textContent = date;
-
-            // Save color information
-            const profileColorSelector = document.querySelector('#profile .color-selector');
-            profileColorSelector.innerHTML = '';
-            
-            for (let i = 0; i < 3; i++) {
-                const colorName = document.getElementById('color-name-' + i).value;
-                const colorValue = document.getElementById('color-value-' + i).value;
-                
-                const colorItem = document.createElement('div');
-                colorItem.className = 'color-item';
-                colorItem.innerHTML = `
-                    <div class="color-circle" style="background-color: ${colorValue};"></div>
-                    <span class="color-label">${colorName}</span>
-                `;
-                profileColorSelector.appendChild(colorItem);
-            }
-        }
-
-        function updateColorCircle(index) {
-            const colorValue = document.getElementById('color-value-' + index).value;
-            const colorCircle = document.getElementById('color-circle-' + index);
-            colorCircle.style.backgroundColor = colorValue;
-        }
-
-        function toggleFollow() {
-            const btn = document.getElementById('followBtn');
-            btn.textContent = btn.textContent === 'Follow' ? 'Unfollow' : 'Follow';
         }
 
         function copyProfileLink(btn) {
@@ -1318,6 +1674,25 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+        function saveUserProfile(event) {
+            event.preventDefault();
+            
+            // Collect all form data
+            const userData = {
+                displayName: document.getElementById('creation-display-name').value,
+                phoneNumber: document.getElementById('creation-phone-number').value,
+                birthday: document.getElementById('creation-birthday').value,
+                avatar: document.getElementById('creation-avatar-preview').src,
+                // ... collect all other fields
+            };
+            
+            // Save to localStorage
+            sessionStorage.setItem('newCorner', JSON.stringify(userData));
+
+            // Redirect to profile
+            window.location.href = 'new-profile.html';
+        }
     </script>
 </body>
 </html>
+
