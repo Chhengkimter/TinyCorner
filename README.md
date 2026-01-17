@@ -5,3 +5,5 @@ Figma prototype: https://www.figma.com/proto/SiAMqmHrWSVQPrkyHIl5nM/Project?node
 Website: https://chhengkimter.github.io/TinyCorner/
 
 Presentation slide: https://www.canva.com/design/DAG-qrDWTOY/nsDM2EOUzdkZApu5meYfWw/edit?utm_content=DAG-qrDWTOY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+Netlify: https://tinycorner.netlify.app/
